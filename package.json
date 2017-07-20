@@ -1,0 +1,38 @@
+{
+  "name": "d3-table",
+  "version": "0.0.1",
+  "description": "a table plugin bases on d3.js",
+  "scripts": {
+    "build": "webpack-dev-server -d --hot --env.dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JS-lover/d3-table.git"
+  },
+  "author": {
+    "name": "Hongyu",
+    "url": "https://github.com/JS-lover/d3-table"
+  },
+  "license": "MIT",
+  "keywords": [
+    "d3.js",
+    "table"
+  ],
+  "bugs": {
+    "url": "https://github.com/JS-lover/d3-table/issues"
+  },
+  "homepage": "https://github.com/JS-lover/d3-table#readme",
+  "dependencies": {
+    "d3": "^4.9.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.1",
+    "babel-core": "^6.22.1",    
+    "css-loader": "^0.26.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^2.2.1"
+  }
+}

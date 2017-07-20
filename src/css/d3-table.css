@@ -1,0 +1,175 @@
+/*defalut style*/
+    .bi-table ::-webkit-scrollbar{
+        width:8px;
+        background-color: rgb(224,224,224);
+    }
+
+     .bi-table ::-webkit-scrollbar-thumb{
+            background-color:rgb(179,179,179);
+        }    
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }   
+    table td{
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;        
+    } 
+    .clearfix:after{
+        content:"";
+        height: 0;
+        visibility: hidden;
+        display: block;
+        clear: both;
+    }
+    .table-toolbar{
+        height:auto;
+        padding-bottom: 6px;        
+        padding-right: 6px;        
+    }
+   
+        .filter-column {
+            position: relative;
+            margin-left: 30px;
+            float: right;
+        }
+            .column-series {
+                position: absolute;
+                top: 26px;
+                right: 0;
+                z-index: 10;
+                background-color: white;
+                width: 100px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                display: none;
+            }
+                .column-series li {
+                    height: 40px;
+                    line-height: 40px;
+                    text-indent: 10px;
+                }
+
+        .search-box{
+            position: relative;
+            float: left;
+        }
+        .icon-search{
+            position: absolute;
+            left:2px;
+            top:4px;
+            font-size: 18px;
+        }
+        .search-input{
+            padding-left: 18px;
+            border-radius: 6px;
+            border-width: 1px;
+            width:260px;
+            /* outline:none;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden; */
+        } 
+        .sort-by{
+            width:auto;
+            float:right;
+            margin-left: 30px;
+        }
+
+            .selection{
+                width:atuo;
+                position: relative;
+                display: inline-block;
+                z-index: 100;
+                margin-left: 10px;
+            }
+            .sort-selected{
+                display: inline-block;
+                width:80px;
+                height: 24px;
+                cursor:pointer;
+            }
+            .selected-value{
+                display: inline-block;
+                text-indent: 10px;
+                height: 24px;
+                line-height: 24px;
+                width:60px;
+            }
+            .select-ul{
+                background-color: gray;
+                width:80px;
+                text-indent: 10px;
+                position: absolute;
+                top: 24px;
+                display: none;
+            }
+            .select-ul ul{
+                margin-bottom: 0;
+            }
+            .select-ul li{
+                cursor:pointer;
+                border-bottom:1px solid white;
+            }
+        .icon-dropdown{
+            font-size: 12px;
+        }
+        .prompt{
+            color:rgb(172,172,172);
+        }
+
+
+    .table-container{
+        position: relative;
+    }
+    .responsive-thead{
+        position: absolute;
+        top: 0;
+    }
+    .fixed-thead,
+    .fixed-tbody{        
+        /* table-layout:automatic; */            
+        width:100%;
+    }
+
+    .fixed-thead thead tr th,
+    .fixed-thead tbody tr td,
+    .fixed-tbody thead tr th,
+    .fixed-tbody tbody tr td {
+        height: 20px;
+        padding-left: 8px;   
+        padding-right: 8px;   
+    }
+    .fixed-thead thead tr th{
+        color: rgb(208,208,208)
+    }
+         
+    /* tbody border */
+     .fixed-tbody>tbody>tr:first-child>td {border-top: 0;} 
+ 
+    .fixed-thead>thead>tr>th+th{
+        border-left:1px solid black;        
+    }    
+    .defalut-sort {}   
+    .ascend-sort {}    
+    .descend-sort {}
+    
+    .center-text {text-align: center;}    
+    .left-text {text-align: left;}   
+    .right-text {text-align: right;}
+
+    .no-data{text-align: center;}
+    
+    .title {font-size: 28px;}
+
+/*custom style*/
+
+.marking{
+    background-color: yellow;
+}
