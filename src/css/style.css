@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'menu';
-  src:  url('fonts/menu.eot?hmjba3');
-  src:  url('fonts/menu.eot?hmjba3#iefix') format('embedded-opentype'),
-    url('fonts/menu.ttf?hmjba3') format('truetype'),
-    url('fonts/menu.woff?hmjba3') format('woff'),
-    url('fonts/menu.svg?hmjba3#menu') format('svg');
+  src:  url('fonts/menu.eot?ydb8hf');
+  src:  url('fonts/menu.eot?ydb8hf#iefix') format('embedded-opentype'),
+    url('fonts/menu.ttf?ydb8hf') format('truetype'),
+    url('fonts/menu.woff?ydb8hf') format('woff'),
+    url('fonts/menu.svg?ydb8hf#menu') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -18,12 +18,25 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+  font-size: 12px;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrow-default:before {
+  content: "\e903";
+  color: #e6e6e6;
+}
+.icon-arrow-up:before {
+  content: "\e904";
+  color: #e6e6e6;
+}
+.icon-arrow-down:before {
+  content: "\e905";
+  color: #e6e6e6;
+}
 .icon-menu:before {
   content: "\e900";
 }
