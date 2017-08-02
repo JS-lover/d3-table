@@ -8,8 +8,14 @@
   font-weight: normal;
   font-style: normal;
 }
-
-.icon {
+.icon,
+.icon-sort,
+.icon-arrow-up,
+.icon-arrow-down,
+.icon-menu,
+.icon-search,
+.icon-dropdown 
+{
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'menu' !important;
   speak: none;
@@ -25,7 +31,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrow-default:before {
+.icon-sort:before {
   content: "\e903";
   color: #e6e6e6;
 }
@@ -43,6 +49,7 @@
 .icon-search:before {
   content: "\e901";
 }
+
 .icon-dropdown:before {
   content: "\e902";
 }

@@ -6,19 +6,6 @@ var config1={
           able: true,
           tableHeight: 126
         },
-        thStyle: {
-          backgroundColor: "rgb(103,103,103)",
-          height: 24,
-          textAlign: "left",
-          color: "white"
-        },
-        tdStyle: {
-          textAlign: "left",
-          height: 24,
-          stripe: true,
-          even: "rgb(237,237,237)",
-          hover: true
-        },
         toolbar: {
           filterColumn:["vendorName","CycleTime"],
           columnSearched: ["vendorName"], //the key value in data
@@ -30,7 +17,7 @@ var config1={
           column: ["Vendor Name", "Cycle Time"], //which column is marked
           icon: "iconname"                       //marked icon className
         },
-        theadDisplayed: ["Vendor Name", "Cycle Time", "Item Count"]//thead ,data key adapt
+        theadConfig:{vendorName: "Vendor Name", CycleTime: "Cycle Time", itemCount: "Item Count"}//thead ,data key adapt
       }
 
 var table1=D3table("#table1",config1,tableData1);

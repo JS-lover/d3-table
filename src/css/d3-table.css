@@ -1,3 +1,19 @@
+    table thead{font-size: 14px;}
+    table tbody{font-size: 12px;}
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    table td {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
     .bi-table ::-webkit-scrollbar {
         width: 8px;
         background-color: rgb(224, 224, 224);
@@ -6,37 +22,20 @@
     .bi-table ::-webkit-scrollbar-thumb {
         background-color: rgb(179, 179, 179);
     }
-    table thead{
-        font-size: 14px;
-    }
-    table tbody{
-        font-size: 12px;
-    }
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
 
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-
-    table td {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
+    .bi-table table thead th{
+        background-color: rgb(103, 103, 103);
+        text-align: left;
+        color: white;
+    }   
     .icon-arrow-default,
     .icon-arrow-down,
     .icon-arrow-up{
         vertical-align: middle;
         padding-left:4px;
     } 
-    .TDclickable{
-        cursor:pointer;
-    }
+    .TDclickable{cursor:pointer;}
+
     .clearfix:after {
         content: "";
         height: 0;
@@ -76,9 +75,7 @@
         text-indent: 10px;
     }
 
-    .search-box {
-        float: left;
-    }
+    .search-box {float: left;}
 
     .icon-search {
         font-size: 14px;
@@ -131,18 +128,15 @@
         display: none;
         font-size: 
     }
-
     .select-ul ul {
         margin-bottom: 0;
     }
-
     .select-ul li {
         cursor: pointer;
         border-bottom: 1px solid #fff;
         width: 97px;
         text-indent: 6px;
     }
-
     .select-ul li:hover{
         background-color: rgb(239, 239, 239);
     }
@@ -154,11 +148,9 @@
     .prompt {
         color: rgb(172, 172, 172);
     }
-
-    .table-container {
+    .table-body{
         position: relative;
     }
-
     .responsive-thead {
         position: absolute;
         top: 0;
@@ -169,6 +161,7 @@
         width: 100%;
     }
 
+    .scroll-thead thead tr th,
     .fixed-thead thead tr th,
     .fixed-thead tbody tr td,
     .fixed-tbody thead tr th,
@@ -183,39 +176,11 @@
     }
 
 
-    /* tbody border */
-
-    .fixed-tbody>tbody>tr:first-child>td {
-        border-top: 0;
-    }
-
-    .fixed-thead>thead>tr>th+th {
-        border-left: 1px solid black;
-    }
-    .defalut-sort {}
-    .ascend-sort {}
-    .descend-sort {}
-    .center-text {
-        text-align: center;
-    }
-    .left-text {
-        text-align: left;
-    }
-
-    .right-text {
-        text-align: right;
-    }
-
+    .fixed-tbody>tbody>tr:first-child>td {border-top: 0;}
+    .fixed-thead>thead>tr>th+th {border-left: 1px solid black;}
     .no-data {
         text-align: center;
     }
-
     .title {
         font-size: 28px;
-    }
-
-
-    /*custom style*/
-    .marking {
-        background-color: yellow;
     }
