@@ -1,5 +1,4 @@
 var D3table=(function(){
-
 	function D3table(ele,options,data){
 		this.name=ele;
 		this.ele=d3.select(ele);
@@ -48,7 +47,6 @@ var D3table=(function(){
 			this.initThead(".fixed-tbody",this.dataCenter.rendedColumn);
 			this.initTbody(".fixed-tbody",this.dataCenter.rendedColumn,this.dataCenter.currentData)
 			this.cloneThead()
-			this.windowResize();
 		 }else{
 			this.initThead(".fixed-tbody",this.dataCenter.rendedColumn);
 			this.initTbody(".fixed-tbody",this.dataCenter.rendedColumn,this.dataCenter.currentData)
@@ -149,9 +147,7 @@ var D3table=(function(){
 							  				}
 							  			})
 										_this.initTbody(".fixed-tbody",_this.dataCenter.rendedColumn,_this.dataCenter.currentData);
-										 if(_this.options.scroll.able){
-											//_this.fitThead();
-										 }
+
 
 							  		},300)
 							  });
@@ -277,9 +273,6 @@ var D3table=(function(){
 
 		    tbodyTr.selectAll("td")
 			        .data(row=>{
-			        	console.log(column.map(col=>{
-			                return { value: row[col],key:col};
-			            }))
 			            return column.map(col=>{
 			                return { value: row[col],key:col};
 			            });
@@ -306,41 +299,43 @@ var D3table=(function(){
 		var _this=this,
 			widthArr=[],
 	    	doc=document,
+	    	nodeHeight=null,
 	    	currentElement=doc.querySelector(_this.name);
-
-	        currentElement.querySelectorAll(".fixed-tbody thead th").forEach(function(d,i){
-	        	widthArr.push(d.offsetWidth);
-	        })
-			var originNode=currentElement.querySelector(".fixed-tbody thead"),
-				nodeHeight=originNode.offsetHeight;
+			var originNode=currentElement.querySelector(".fixed-tbody thead");
 
         	if(_this.fixedTheadEle){d3.select(".scroll-thead").remove();}
-    		_this.fixedTheadEle=d3.select(_this.name).select(".table-body").append("table").attr("class","scroll-thead"),
-    			newNode=originNode.cloneNode(true);
+    		_this.fixedTheadEle=d3.select(_this.name).select(".table-body").append("table").attr("class","scroll-thead");
+    		var newNode=originNode.cloneNode(true);
     		d3.select(newNode).selectAll(".icon-sort").remove();
     		d3.select(newNode).selectAll(".icon-arrow-up").remove();
     		d3.select(newNode).selectAll(".icon-arrow-down").remove();
 
-	        newNode.querySelectorAll("th").forEach(function(d,i){
-	        	d.style.width=widthArr[i]+"px";
-	        })
 	        currentElement.querySelector(".scroll-thead").appendChild(newNode);
         	_this.fixedTheadEle.style("position","absolute")
         					   .style("display","none")
-     		_this.toggleThead(currentElement,nodeHeight)
 
 		this.ele.select(".table-body").on("scroll."+_this.name,()=>{
+			if(widthArr.length===0){
+		        currentElement.querySelectorAll(".fixed-tbody thead th").forEach(function(d,i){
+		        	widthArr.push(d.offsetWidth);
+		        })	
+			}
+	        if(nodeHeight==null)nodeHeight=originNode.offsetHeight;
+	        newNode.querySelectorAll("th").forEach(function(d,i){
+	        	d.style.width=widthArr[i]+"px";
+	        })
      		this.toggleThead(currentElement,nodeHeight)
 		})
 	}
 	D3table.prototype.toggleThead=function(ele,theadHeight){
-			var sTop=ele.querySelector(".table-body").scrollTop;
-	        	this.fixedTheadEle.style("top",sTop+"px");	 
+			var sTop=ele.querySelector(".table-body").scrollTop,
+				scrollThead=d3.select(ele).select(".scroll-thead");
 
-	        if(sTop>theadHeight&&this.fixedTheadEle.style("display")=="none"){
-	        	this.fixedTheadEle.style("display","block")
-	        }else if(sTop<theadHeight){
-	        	this.fixedTheadEle.style("display","none")
+	       	scrollThead.style("top",sTop+"px");	 
+	        if(sTop>theadHeight&&scrollThead.style("display")=="none"){
+	        	scrollThead.style("display","block")
+	        }else if(sTop<theadHeight&&scrollThead.style("display")=="block"){
+	        	scrollThead.style("display","none")
 	        }  		
 	}
 
@@ -403,28 +398,6 @@ var D3table=(function(){
 								no data to display
 							</td></tr>`);
 	}
-	D3table.prototype.getTdItemWidth=function(){
-	    var widthArr=[],
-	    	_this=this,
-	    	doc=document,
-	    	currentElement=doc.querySelector(this.name);
-        currentElement.querySelectorAll(".fixed-tbody thead th").forEach(function(d,i){
-        	// widthArr.push(getStyle(d,"width"));
-        	widthArr.push(d.offsetWidth);
-        })
-        currentElement.querySelectorAll(".fixed-thead thead th").forEach(function(d,i){
-        	d.style.width=widthArr[i]+"px";
-        })
-	}
-	D3table.prototype.windowResize=function(){
-		if(this.windowResizeTimer)clearTimeout(this.windowResizeTimer);
-		d3.select(window).on("resize."+this.name,()=>{
-			this.windowResizeTimer= setTimeout(()=>{
-				//this.fitThead();
-			},1000)
-		})	
-	}
-
 	D3table.prototype.clearFloat=function(parent){
 		this.ele.select(parent).append("div")
 								   .attr("class","clearfix");		
@@ -446,12 +419,29 @@ var D3table=(function(){
 	}
 	function ascendSort(data,key){
 		data.sort((a,b)=>{
-			return (typeof a[key])!="number"?a[key].localeCompare(b[key]):a[key]-b[key];
+			if(/^((\d+\.?\d*)|(\d*\.\d+))\%$/.test(a[key])){
+				var A=a[key].substr(0,a[key].length-1),
+					B=b[key].substr(0,b[key].length-1);
+				return Number(A)-Number(B);
+			}else if((typeof a[key])!="number"){
+				return a[key].localeCompare(b[key]);
+			}else{
+				return a[key]-b[key];
+			}
+			
 		});
 	}
 	function descendSort(data,key){
 		data.sort((a,b)=>{
-			return (typeof a[key])!="number"?b[key].localeCompare(a[key]):b[key]-a[key];
+			if(/^((\d+\.?\d*)|(\d*\.\d+))\%$/.test(a[key])){
+				var A=a[key].substr(0,a[key].length-1),
+					B=b[key].substr(0,b[key].length-1);
+				return Number(B)-Number(A);
+			}else if((typeof a[key])!="number"){
+				return b[key].localeCompare(a[key]);
+			}else{
+				return b[key]-a[key];
+			}
 		});
 	}
 
