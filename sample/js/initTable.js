@@ -8,9 +8,9 @@ var config1={
         },
         toolbar: {
           filterColumn:["vendorName","CycleTime"],
-          columnSearched: ["vendorName"], //the key value in data
-          sortBy: ["Vendor Name", "Cycle Time", "Item Count"], //the column value in table view
+          columnSearched: ["vendorName","CycleTime"], //the key value in data
           placeholderTxt: "Type to start search Vendor Name"  //the tip in search input
+          //sortBy: ["Vendor Name", "Cycle Time", "Item Count"], //the column value in table view
         },
         clickable: ["Vendor Name"],   //which column is clickable,the key should be same as that in thead  
         mark: {
@@ -19,21 +19,23 @@ var config1={
         },
         theadConfig:{vendorName: "Vendor Name", CycleTime: "Cycle Time", itemCount: "Item Count"}//thead ,data key adapt
       }
+var LEAPconfig={
+        sort: true,
 
-var table1=D3table("#table1",config1,tableData1);
+        toolbar: {
+          columnSearched: ["userName"], //the key value in data
+          filterColumn:["Email","Company"],
+          placeholderTxt: "Type to start search User Name"  //the tip in search input
+        },
+        clickable: ["User Name"],   //which column is clickable,the key should be same as that in thead  
+        mark: {
+          column: [], //which column is marked
+          icon: "iconname"                       //marked icon className
+        },
+        theadConfig:{useName: "User Name", email: "Email", company: "Company",process:"Process",role:"Role",status:"Status",actions:"Action"}//thead ,data key adapt
+      }
+
+var table1=D3table("#table1",LEAPconfig,LEAPUser);
+// var table1=D3table("#table1",config1,tableData1);
 table1.init()
 
-var table2=D3table("#table2",config1,tableData1);
-table2.init()
-
-
-
-/*var table2=D3table("#table2",config2,tableData2);
-table2.init()
-
-var table3=D3table("#table3",config3,tableData3);
-table3.init()
-
-var table4=D3table("#table4",config4,tableData3);
-table4.init()
-*/

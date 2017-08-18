@@ -270,8 +270,7 @@ var D3table=(function(){
 		        .data(data)
 		        .enter()
 		        .append("tr");
-
-		    tbodyTr.selectAll("td")
+		    var tbodyTd=tbodyTr.selectAll("td")
 			        .data(row=>{
 			            return column.map(col=>{
 			                return { value: row[col],key:col};
@@ -280,7 +279,6 @@ var D3table=(function(){
 			        .enter()
 			        .append("td")
 			        .attr("class",(d,i)=>{
-
 			        	var name="";
 			        	if(this.options.mark.column.length>=0&&this.options.mark.column.indexOf(this.options.theadConfig[d.key])>=0){
 			        		name+=" "+this.options.mark.icon;
@@ -288,11 +286,156 @@ var D3table=(function(){
 			        	if(this.options.clickable.length>0&&this.options.clickable.indexOf(this.options.theadConfig[d.key])>=0){
 			        		name+=" TDclickable";
 			        	}
+			        	if(d.key=="actions"||d.key=="status"){
+			        		return d.key;
+			        	}
+			        	if(d.value.type=="tip"){
+			        		return d.value.type;
+			        	}
 			        	return name;
 			        })
-			        .text(function(d) {
-			            return d.value;
-			        })   	
+
+			        .html(function(d) {
+
+			        	var type =d.key,
+			        	    type_ =d.value.type,
+			        	    content=d.value,
+			        		html="";
+
+			        	if(type&&type=="actions"){
+			        		content.forEach((d,i)=>{
+				        		html+=`<i class=${d.class}></i>`
+				        	})
+				            return html;
+			        	}else if(type=="status"){
+			        		content.forEach((d,i)=>{
+			        			html+=`<i class=${d.class}></i>${d.value}`
+			        		})
+		           			return html;			        		
+			        	}else if(type_&&type_=="tip"){
+			        		return html+=`<span class="tip-title">${content.title}</span>`;
+			        	}else{
+			        		return content;
+			        	}
+			        }) 
+					var _this=this;
+					d3.selectAll(".actions").on("click",function(d){
+						var targetClassName=d3.event.target.className,
+							targetRowData=d3.select(d3.event.target.parentNode.parentNode).data(),
+							currentData=_this.dataCenter.currentData,
+							targetUseName=targetRowData[0].useName,
+							clickedIndex=null,
+							targetRowDataValues=Object.values(targetRowData[0]);
+						for(let i=0;i<currentData.length;i++){
+							if(currentData[i]["useName"]==targetUseName){
+								clickedIndex=i+1;
+								break;
+							}
+						}
+
+						if(targetClassName=="icon-pencil"){
+							/*if(_this.ele.select(".edit-table-box"))_this.ele.select(".edit-table-box").remove()
+							var rowEditor=_this.ele.select(".table-body").append("div")
+									 .attr("class","edit-table-box")
+									 .style("top",clickedIndex*28+"px");
+							rowEditor.html(
+									`<table class="table-editor">
+										<tbody>
+											<tr>
+											</tr>
+										</tbody>
+									</table>`)
+
+							var editConfiger=[{
+												name:"useName",type:"input"
+											},{
+												name:"email",type:"input"
+											},{
+												name:"company",type:"select"
+											},{
+												name:"process",type:"select"
+											},{
+												name:"role",type:"selectFixedValue"
+											},{
+												name:"status",type:"none"
+											},{
+												name:"actions",type:"icon"
+											}]
+							editConfiger.forEach((d,i)=>{
+								for(let k in targetRowData[0]){
+									if(targetRowData[0].hasOwnProperty(k)&&k==d.name){
+										d.value=targetRowData[0][k];
+										continue;
+									}
+								}
+							})
+							console.log(editConfiger)
+							_this.ele.selectAll(".table-editor tbody tr").selectAll("td")
+									 .data(editConfiger)
+									 .enter()
+									 .append("td")
+									 .html(d=>{
+									 	if(d.type=="input"){
+									 		return `<input type="text" class="editor-input editor-input-${d.name}" value=${d.value}></input>`
+									 	}
+									 	if(d.type=="select"){
+									 		return `<select class="editor-select editor-select-${d.name}" value=${d.value}>
+														<option></option>
+														<option></option>
+									 				</select>`
+									 	}
+									 	if(d.type=="none"){
+									 		return d.value;
+									 	}
+									 	if(d.type=="selectFixedValue"){
+									 		return `<select class="editor-select editor-select-${d.name}" value=${d.value}>
+														<option>Sales</option>
+														<option>admin</option>
+									 				</select>`
+									 	}
+									 	if(d.type=="icon"){
+									 		return 	`<i class='icon-save'></i>
+									 				 <i class='icon-delete-disable'></i>
+									 				 Enable<i class='icon-disable-toggle'></i>`;
+									 	}
+									 })
+					        _this.ele.node().querySelectorAll(".table-editor tbody td").forEach(function(d,i){
+					        	d.style.width=widthArr[i]+"px";
+					        })*/
+
+
+						}
+						if(targetClassName=="icon-enable-active"){
+							console.log("icon-enable-active")
+						}
+						if(targetClassName=="icon-enable-reject"){
+							console.log("icon-enable-active")
+						}
+					})
+
+					d3.selectAll(".tip-title").on("mouseover",function(d){
+						var event=d3.event;
+						if(_this.ele.select(".tooltip"))_this.ele.select(".tooltip").remove()
+						var targetNode=d3.event.target,
+						 	ptNode=targetNode.parentNode,
+							targetRowData=d3.select(ptNode).data();
+
+						var rowEditor=_this.ele.select(".table-body").append("div")
+								 .attr("class","tooltip")
+
+						rowEditor.selectAll("p")
+								 .data(targetRowData[0]["value"]["list"])
+								 .enter()
+								 .append("p")
+								 .html(d=>d)
+						rowEditor.style("top",20+ptNode.offsetTop-rowEditor.node().offsetHeight/2+"px")
+								 .style("left",18+ptNode.offsetLeft+targetNode.offsetWidth+"px");
+						console.log(rowEditor.node().offsetHeight)
+					})
+					d3.selectAll(".tip-title").on("mouseout",function(d){
+						 if(_this.ele.select(".tooltip"))_this.ele.select(".tooltip").remove()
+					})
+
 	    }
 	}
 	D3table.prototype.cloneThead=function(){
@@ -316,9 +459,7 @@ var D3table=(function(){
 
 		this.ele.select(".table-body").on("scroll."+_this.name,()=>{
 			if(widthArr.length===0){
-		        currentElement.querySelectorAll(".fixed-tbody thead th").forEach(function(d,i){
-		        	widthArr.push(d.offsetWidth);
-		        })	
+				_this.getTdsWidth(currentElement,".fixed-tbody thead th",widthArr);
 			}
 	        if(nodeHeight==null)nodeHeight=originNode.offsetHeight;
 	        newNode.querySelectorAll("th").forEach(function(d,i){
@@ -326,6 +467,11 @@ var D3table=(function(){
 	        })
      		this.toggleThead(currentElement,nodeHeight)
 		})
+	}
+	D3table.prototype.getTdsWidth=function(ele,seletor,result){
+        ele.querySelectorAll(seletor).forEach(function(d,i){
+        	result.push(d.offsetWidth);
+        })			
 	}
 	D3table.prototype.toggleThead=function(ele,theadHeight){
 			var sTop=ele.querySelector(".table-body").scrollTop,
@@ -445,10 +591,6 @@ var D3table=(function(){
 		});
 	}
 
-	function getStyle(ele,prop){
-	    var style=window.getComputedStyle?window.getComputedStyle(ele, null):ele.currentStyle;     
-	    return style[prop];
-	}	
 	return function(ele,options,data){
 	 	return new D3table(ele,options,data);
 	}	

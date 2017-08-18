@@ -24,7 +24,8 @@
     }
 
     .bi-table table thead th{
-        background-color: rgb(103, 103, 103);
+        /*background-color: rgb(103, 103, 103);*/
+        background-color: black;
         text-align: left;
         color: white;
     }   
@@ -144,7 +145,44 @@
     .sort-selected>.glyphicon-menu-down {
         font-size: 10px;
     }
-
+    /* action */
+    .actions i{
+        display: inline-block;
+        margin-right: 16px;
+        font-size: 16px;
+        
+    } 
+    .status i{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
+    .tooltip{
+        min-width: 120px;
+        position: absolute;
+        background: white;
+        padding: 10px;
+        border: 1px solid gray;
+        border-radius: 6px;
+    }
+    .tooltip p{
+        margin:0;
+        height: 26px;
+        line-height: 26px;
+        font-size: 12px;
+    }
+    .tip-title{
+        cursor:pointer;
+        text-decoration: underline;
+    }
+    .status .rejected{
+        background: gray;
+    }
+    .status .approved{
+        background: green;
+    }
     .prompt {
         color: rgb(172, 172, 172);
     }
@@ -163,10 +201,15 @@
 
     .scroll-thead thead tr th,
     .fixed-thead thead tr th,
+    .fixed-tbody thead tr th{
+        height: 28px;
+        padding-left: 10px;
+        padding-right: 10px;        
+    }
+
     .fixed-thead tbody tr td,
-    .fixed-tbody thead tr th,
     .fixed-tbody tbody tr td {
-        height: 20px;
+        height: 28px;
         padding-left: 8px;
         padding-right: 8px;
     }
