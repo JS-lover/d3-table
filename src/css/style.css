@@ -1,32 +1,14 @@
 @font-face {
   font-family: 'menu';
   src:
-    url('fonts/menu.ttf?z050zr') format('truetype'),
-    url('fonts/menu.woff?z050zr') format('woff'),
-    url('fonts/menu.svg?z050zr#menu') format('svg');
+    url('fonts/menu.ttf?j4rqyz') format('truetype'),
+    url('fonts/menu.woff?j4rqyz') format('woff'),
+    url('fonts/menu.svg?j4rqyz#menu') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.icon-ascend-sort,
-.icon-delete,
-.icon-descend-sort,
-.icon-disable-toggle,
-.icon-enable-toggle,
-.icon-down.icon-down,
-.icon-drop-up,
-.icon-menu,
-.icon-pencil,
-.icon-search,
-.icon-sort,
-.icon-save,
-.icon-enable-active,
-.icon-disable-active,
-.icon-enable-reject,
-.icon-disable-reject,
-.icon-right,
-.icon-delete-disable,
-.icon {
+i {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'menu' !important;
   speak: none;
@@ -57,6 +39,9 @@
 }
 .icon-error:before {
   content: "\e90d";
+}
+.icon-right:before {
+  content: "\e912";
 }
 .icon-ascend-sort:before {
   content: "\e900";

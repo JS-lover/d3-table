@@ -1,5 +1,8 @@
     table thead{font-size: 14px;}
-    table tbody{font-size: 12px;}
+    table tbody{
+        font-size: 12px;
+    
+    }
     ul {
         list-style: none;
         margin: 0;
@@ -10,9 +13,7 @@
         border-spacing: 0;
     }
     table td {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
+
     }
     .bi-table ::-webkit-scrollbar {
         width: 8px;
@@ -227,3 +228,28 @@
     .title {
         font-size: 28px;
     }
+
+
+.td-clickable{
+    cursor:pointer;
+}
+.bi-table table tr{
+    height: 30px;
+    border:1px solid #cecece;
+    display: table;
+    width: 100%;
+    table-layout: fixed;    
+}
+
+.bi-table table tbody{
+    /*height: 300px;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+}    
+
+.filter-column ul input,
+.filter-column ul label{
+    cursor:pointer;
+    vertical-align: middle;
+}
